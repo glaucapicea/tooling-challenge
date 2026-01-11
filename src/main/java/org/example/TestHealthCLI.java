@@ -1,7 +1,10 @@
 package org.example;
 
-import java.io.File;
 import java.util.List;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,14 +17,16 @@ public class TestHealthCLI {
             System.exit(1);
         }
 
-        // TODO: Check if file exists and is readable. Throw proper exception.
+        Path filePath = Paths.get(args[0]);
+        if (!Files.exists(filePath) | !Files.isRegularFile(filePath) | !Files.isReadable(filePath)) {
+            throw new IOException("Input file '" + filePath + "' is invalid");
+        }
 
-        File filePath = new File(args[0]);
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         List<TestResult> results = mapper.readValue(
-                filePath,
+                filePath.toFile(),
                 new TypeReference<List<TestResult>>() {}
         );
 
