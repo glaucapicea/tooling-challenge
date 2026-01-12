@@ -17,3 +17,9 @@ RUN jenkins-plugin-cli --plugins \
     build-timeout \
     workflow-aggregator \
     maven-plugin
+
+# Copy seed job DSL script
+COPY seedJob.groovy /usr/share/jenkins/ref/seedJob.groovy
+
+# Copy init script to auto-create the seed job
+COPY init.groovy.d/createSeedJob.groovy /usr/share/jenkins/ref/init.groovy.d/createSeedJob.groovy
