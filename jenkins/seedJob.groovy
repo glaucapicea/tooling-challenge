@@ -38,7 +38,7 @@ job('test-health-reporter') {
             mvn clean package
 
             echo "Running Test Health Report..."
-            java -jar target/test-health-cli-1.0.0.jar $RESULT_FILE
+            java -jar target/test-health-cli.jar $RESULT_FILE
         ''')
     }
 }
