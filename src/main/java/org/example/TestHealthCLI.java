@@ -18,8 +18,16 @@ public class TestHealthCLI {
             System.exit(1);
         }
         Path filePath = Paths.get(args[0]);
-        if (!Files.exists(filePath) || !Files.isRegularFile(filePath) || !Files.isReadable(filePath)) {
-            throw new IOException("Input file '" + filePath + "' is invalid");
+        if (!Files.exists(filePath)) {
+            throw new IOException("Input file does not exist: " + filePath);
+        }
+
+        if (!Files.isRegularFile(filePath)) {
+            throw new IOException("Input path is not a regular file: " + filePath);
+        }
+
+        if (!Files.isReadable(filePath)) {
+            throw new IOException("Input file is not readable: " + filePath);
         }
 
         // Parse input JSON
