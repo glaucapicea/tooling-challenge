@@ -10,6 +10,7 @@ services:
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
     restart: unless-stopped
+    network_mode: bridge
 
 volumes:
   jenkins_home:
