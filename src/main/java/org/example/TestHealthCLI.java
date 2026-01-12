@@ -18,7 +18,7 @@ public class TestHealthCLI {
             System.exit(1);
         }
         Path filePath = Paths.get(args[0]);
-        if (!Files.exists(filePath) | !Files.isRegularFile(filePath) | !Files.isReadable(filePath)) {
+        if (!Files.exists(filePath) || !Files.isRegularFile(filePath) || !Files.isReadable(filePath)) {
             throw new IOException("Input file '" + filePath + "' is invalid");
         }
 
